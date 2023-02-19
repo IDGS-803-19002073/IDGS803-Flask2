@@ -34,9 +34,8 @@ def cajasDinamicas():
 def calculador():
     if request.method=='POST':
         suma=0
-        menor=0
+        menor=int(request.form.get('txtNumero0'))
         numerosRepetidos={}
-     
         mayor = int(request.form.get('txtNumero0'))
         
         for element in request.form:
@@ -47,12 +46,12 @@ def calculador():
         
             if int(request.form.get(element))>mayor:
                 mayor= int(request.form.get(element))
-            else:
+            
+            if int(request.form.get(element))<menor:
                 menor= int(request.form.get(element))
 
             suma+= int(request.form.get(element))
-            promedio= suma/len(request.form)
-            print(numerosRepetidos)
+        promedio= suma/len(request.form)
      
     return render_template("resultadoOperaciones.html",suma=suma,mayor=mayor,menor=menor,promedio=promedio,numerosRepetidos=numerosRepetidos) 
         
