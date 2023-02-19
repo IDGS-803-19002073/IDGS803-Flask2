@@ -1,0 +1,57 @@
+{% extends "layoutCinepolis.html" %}
+{% block content %}
+    <h1 class="text-center mt-4">Cinepolis</h1>
+    <div class="container">
+        <div class="card" style="background-color:#1d5eb2">
+            <div class="card-body">
+              <h5 class="card-title text-center text-white">Entradas</h5>
+              
+              <form  action="/validacion" method="POST">
+                
+                    <div class="col-sm-2 mx-auto">
+                    <label class="control-label text-white" for="inputNombre">Nombre</label>
+                    <input type="text" class="form-control mb-3"name="txtNombre" required>
+                  
+                    <label class="control-label text-white" for="inputNombre">Cantidad Compradores</label>
+                    <input type="text" class="form-control mb-3" name="txtCantidadCompradores" required>
+                   
+
+                   <div class="d-flex justify-content-center mb-3">
+                    <label class="form-check-label text-white " for="inlineRadio2">Tarjeta de CINECO</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="op" id="inlineRadio1" value="si"  checked>
+                        <label class="form-check-label text-white" for="inlineRadio1">Si</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="op" id="inlineRadio2" value="no"  >
+                        <label class="form-check-label text-white" for="inlineRadio2">No</label>
+                      </div>
+                    </div>
+                   
+                   
+                    <label class="control-label text-white" for="inputNombre">Cantidad de boletos</label>
+                    <input type="text" class="form-control mb-3 "name="txtCantidad" required>
+                   
+                    <label class="control-label text-white" for="inputNombre">Valor a pagar</label>
+                    <input type="text" class="form-control mb-3"  name="txtValorPagar" placeholder="$" value="{{resultado}} mxn" readonly>
+                   </div>
+
+                   {% if mensaje %}
+                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>{{mensaje}}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                    {% endif %}
+                        
+                   
+
+                   <div class="d-grid gap-2 col-1 mx-auto">
+                    <button type="submit" class="btn btn-warning text-white text-center">procesar</button>
+                  </div>
+                   
+                
+              </form>
+            </div>
+          </div>
+    </div>
+{% endblock %}
