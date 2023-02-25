@@ -25,10 +25,11 @@ def alumnos():
 
 @app.route("/cajasDinamicas",methods=['GET','POST'])
 def cajasDinamicas():
+    numero=0
     alum_form= numeroForm.UseForm(request.form)
     if request.method=='POST':
         numero= request.form.get("numero")
-        return render_template("cajasDinamicas.html",form=alum_form,cajas=int(numero)) 
+    return render_template("cajasDinamicas.html",form=alum_form,cajas=int(numero)) 
 
 @app.route("/calculador",methods=['GET','POST'])
 def calculador():
