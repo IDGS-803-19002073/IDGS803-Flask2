@@ -2,8 +2,11 @@
 {% block content %}
 <h2>Formulario</h2>
     <div class="col-xs-6">
+        
         {% from "_macros.html" import render_field %}
         <form action="/cajasDinamicas" method="post">
+            {{form.csrf_token}}
+         <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
                 {{render_field(form.numero)}}
                 <input class="m-3"  type="submit" value="Registrar">
         </form>
@@ -11,6 +14,9 @@
         {% from "_macros.html" import render_input %}
                 {% if cajas %}
                 <form action="/calculador" method="post">
+                    {{form.csrf_token}}
+         <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+
                   
                             {%for i in range(0, cajas)%}  
                             {{render_input("txtNumero%s" % i,"numero %s" %(i+1),"numero%s" % i,type="number")}}

@@ -62,8 +62,11 @@ def calculador():
         menor=int(request.form.get('txtNumero0'))
         numerosRepetidos={}
         mayor = int(request.form.get('txtNumero0'))
+        print(request.form)
+
         
         for element in request.form:
+          if element!="csrf_token":
             
             if request.form.get(element) not in numerosRepetidos:
                 numerosRepetidos[request.form.get(element)] = 0
