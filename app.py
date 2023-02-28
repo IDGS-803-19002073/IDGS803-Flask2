@@ -34,6 +34,33 @@ def saludo():
     return render_template('saludo.html', nom = nombres[0])
 
 
+
+@app.route("/traductor",methods=['GET','POST'])
+def traducir():
+    result=""
+    
+    if request.form.get("palabraEng") or request.form.get("palabraEsp"):
+        palabraIngles=request.form.get("palabraEng")
+        palabraEspanol=request.form.get("palabraEsp")
+        f = open('palabras.txt','a')
+        f.write(palabraIngles.lower()+' '+palabraEspanol.lower()+'\n')
+        f.close()
+    elif request.form.get("palabra"):
+        palabra=request.form.get("palabra").lower()
+
+        fichero = open('palabras.txt')
+        lineas = fichero.readlines()
+
+        for linea in lineas:
+            arraySplit=linea.split()
+            if arraySplit[0] == palabra:
+                result=arraySplit[1]
+            elif arraySplit[1] == palabra:
+                result=arraySplit[0]
+
+    return render_template('traductor.html',result=result)
+
+
 #Rutas de paginas decorador
 @app.route("/formulario")
 def formulario():
