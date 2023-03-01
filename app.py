@@ -1,3 +1,4 @@
+import math
 from flask import Flask,render_template,redirect,url_for,request, make_response, flash
 import forms
 from flask_wtf.csrf import CSRFProtect
@@ -9,6 +10,7 @@ csrf = CSRFProtect(app)
 @app.errorhandler(404)
 def no_encontrada(e):
     return render_template('404.html'),404
+
 
 @app.route("/cookies", methods = ['GET','POST'])
 def cookies():
@@ -32,6 +34,72 @@ def saludo():
     valor_cookie = request.cookies.get('datos_user')
     nombres = valor_cookie.split('@')
     return render_template('saludo.html', nom = nombres[0])
+
+valores = {
+        "1": 0,
+        "2": 1,
+        "3": 2,
+        "4": 3,
+        "5": 4,
+        "6": 5,
+        "7": 6,
+        "8": 7,
+        "9": 8,
+        "10": 9
+    }
+english_names = {
+        "1": "black",
+        "2": "brown",
+        "3": "red",
+        "4": "orange",
+        "5": "yellow",
+        "6": "green",
+        "7": "blue",
+        "8": "violet",
+        "9": "gray",
+        "10": "white",
+        "oro": "gold",
+        "plata": "silver"
+    }
+esp_names = {
+            "1": "negro",
+            "2": "cafe",
+            "3": "rojo",
+            "4": "naranja",
+            "5": "amarillo",
+            "6": "verde",
+            "7": "azul",
+            "8": "violeta",
+            "9": "gris",
+            "10": "blanco",
+            "oro": "oro",
+            "plata": "plata"
+        }
+@app.route("/resistencia",methods=['GET','POST'])
+def calcularResistencia():
+    banda1=request.form.get("banda1")
+    banda2=request.form.get("banda2")
+    banda3=request.form.get("banda3")
+    tolerancia= request.form.get("tolerancia")
+    if request.method == 'POST':
+        banda1_en = english_names[banda1]
+        banda2_en = english_names[banda2]
+        banda3_en = english_names[banda3]
+        tolerancia_en = english_names[tolerancia]
+
+        valor1 = valores[banda1]
+        valor2 = valores[banda2]
+        multiplicador = math.pow(10, valores[banda3])
+        tolerancia_valor = 0.05 if tolerancia == "oro" else 0.1
+
+        valor = (valor1 * 10 + valor2) * multiplicador
+        valor_minimo = valor * (1 - tolerancia_valor)
+        valor_maximo = valor * (1 + tolerancia_valor)
+        #banda1=esp_names[banda1],banda2=esp_names[banda2],banda3=esp_names[banda3],tolerancia=esp_names[tolerancia], banda1_en=banda1_en,banda2_en=banda2_en,banda3_en=banda3_en,tolerancia_en=tolerancia_en, valor=valor,valor_minimo=valor_minimo,valor_maximo=valor_maximo
+
+        return render_template('resistencia.html',banda1=esp_names[banda1],banda2=esp_names[banda2],banda3=esp_names[banda3],tolerancia=esp_names[tolerancia], banda1_en=banda1_en,banda2_en=banda2_en,banda3_en=banda3_en,tolerancia_en=tolerancia_en, valor=valor,valor_minimo=valor_minimo,valor_maximo=valor_maximo)
+    return render_template('resistencia.html')
+
 
 
 

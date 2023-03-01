@@ -1,0 +1,111 @@
+{% extends "layoutCinepolis.html" %}
+{% block content %}
+<h2 class="text-center mt-4">Calcular Resistencias</h2>
+
+   <div class="d-flex justify-content-center">
+    <img src="https://www.electrontools.com/Home/WP/wp-content/uploads/2019/04/esistencia-de-4-bandas.jpg" alt="..." class="img-thumbnail">
+   </div>
+
+
+
+  <div class="row d-flex justify-content-center mt-3">
+    <div class="col-3">
+  <label for="cars">Banda 1:</label>
+  <select class="form-select " id="banda1" name="banda1" form="carform">
+    <option value="1" selected>Negro</option>
+    <option value="2">Cafe</option>
+    <option value="3">Rojo</option>
+    <option value="4">Naranja</option>
+    <option value="5">Amarillo</option>
+    <option value="6">Verde</option>
+    <option value="7">Azul</option>
+    <option value="8">Violeta</option>
+    <option value="9">Gris</option>
+    <option value="10">Blanco</option>
+  </select>
+    </div>
+
+    <div class="col-3">
+        <label for="cars">Banda 2:</label>
+        <select class="form-select " id="banda2" name="banda2" form="carform">
+            <option value="1" selected>Negro</option>
+    <option value="2">Cafe</option>
+    <option value="3">Rojo</option>
+    <option value="4">Naranja</option>
+    <option value="5">Amarillo</option>
+    <option value="6">Verde</option>
+    <option value="7">Azul</option>
+    <option value="8">Violeta</option>
+    <option value="9">Gris</option>
+    <option value="10">Blanco</option>
+        </select>
+          </div>
+
+          <div class="col-3">
+            <label for="cars">Banda 3:</label>
+            <select class="form-select " id="banda3" name="banda3" form="carform">
+                <option value="1" selected>Negro</option>
+    <option value="2">Cafe</option>
+    <option value="3">Rojo</option>
+    <option value="4">Naranja</option>
+    <option value="5">Amarillo</option>
+    <option value="6">Verde</option>
+    <option value="7">Azul</option>
+    <option value="8">Violeta</option>
+    <option value="9">Gris</option>
+    <option value="10">Blanco</option>
+              
+            </select>
+              </div>
+</div>
+
+
+
+<div class="d-flex justify-content-center mt-3">
+<form action="/resistencia" method="post" id="carform">
+    <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+    <h5>Elige la tolerancia</h5>
+
+    <div>
+        <input class="form-check-input" type="radio" id="oro" name="tolerancia" value="oro"
+               checked>
+        <label for="oro">Oro = 05</label>
+      </div>
+  
+      <div>
+        <input class="form-check-input" type="radio" id="plata" name="tolerancia" value="plata">
+        <label for="plata">Plata = 10</label>
+      </div>
+
+    <input class="btn btn-dark m-4" type="submit" class="btn btn-dark">
+  </form>
+</div>
+
+{% if banda1 %}
+<table class="d-flex justify-content-center m-4">
+    <tr>
+      <th>Banda 1</th>
+      <th>Banda 2</th>
+      <th >Banda 3</th>
+      <th >Banda 3</th>
+      <th >valor</th>
+      <th >minimo</th>
+      <th >maximo</th>
+    </tr>
+  
+    <tr> 
+      <td style="background-color:{{banda1_en}}" class="text-white">{{banda1}}</td>
+      <td style="background-color:{{banda2_en}}" class="text-white">{{banda2}}</td>
+      <td style="background-color:{{banda3_en}}" class="text-white">{{banda3}}</td>
+      <td style="background-color:{{tolerancia_en}}" class="text-white">{{tolerancia}}</td>
+      <td >{{valor}}</td>
+      <td >{{valor_minimo}}</td>
+      <td >{{valor_maximo}}</td>
+    </tr>
+
+  </table>
+  {% endif %}
+
+
+
+{% endblock %}

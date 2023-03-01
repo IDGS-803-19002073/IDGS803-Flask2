@@ -6,3 +6,4 @@ computer computadora
 computer computadora
 pencil lapiz
 hair cabello
+keyboard teclado
